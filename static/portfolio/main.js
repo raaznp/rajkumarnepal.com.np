@@ -15,16 +15,6 @@ MenuBtn.addEventListener('click', function (e) {
 }
 )
 
-/*Typing Effect*/
-
-let typed = new Typed('.auto-typed',{
-    strings: ['Backend Developer!', 'Cloud Engineer!', 'AI Engineer!', 'Freelancer!'],
-    typeSpeed: 35,
-    backSpeed: 20,
-    backDekay: 2000,
-    loop: true,
-})
-
 
 /* Active Link */
 
