@@ -7,33 +7,48 @@
 - For: Assignment Submission
 ------------------------------------------*/
 /* Header toggle */
-let MenuBtn = document.getElementById('MenuBtn')
-
-MenuBtn.addEventListener('click', function (e) {
-    document.querySelector('body').classList.toggle('mobile-nav-active')
-    this.classList.toggle('fa-xmark')
+let MenuBtn = document.getElementById('MenuBtn');
+if (MenuBtn) {
+    MenuBtn.addEventListener('click', function (e) {
+        document.querySelector('body').classList.toggle('mobile-nav-active');
+        this.classList.toggle('fa-xmark');
+    });
 }
-)
 
+/* --- Advanced Scrollspy using IntersectionObserver --- */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav ul li a');
 
-/* Active Link */
+const options = {
+    root: null,
+    rootMargin: '-20% 0px -70% 0px', // Detects when section is in the top/middle of the viewport
+    threshold: 0
+};
 
-// Getting all the links
-let navLinks = document.querySelectorAll('nav ul li a');
-// Getting all the sections
-let sections = document.querySelectorAll('section');
-
-// Function to check the active link
-window.addEventListener('scroll', function() {
-    const scrollPos = window.scrollY + 20; // Adding 20px offset for better accuracy
-    sections.forEach(section => {
-        if(scrollPos > section.offsetTop && scrollPos < (section.offsetTop + section.offsetHeight)) {
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            
             navLinks.forEach(link => {
-                link.classList.remove('active'); // Remove 'active' class from all links
-                if(section.getAttribute('id') === link.getAttribute('href').substring(1)) {
-                    link.classList.add('active'); // Add 'active' class to the correct link
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                    link.classList.add('active');
                 }
             });
         }
     });
+}, options);
+
+sections.forEach(section => {
+    observer.observe(section);
+});
+
+// Fallback for the very top of the page (Home section)
+window.addEventListener('scroll', () => {
+    if (window.scrollY < 100) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const homeLink = document.querySelector('nav ul li a[href="#home"]');
+        if (homeLink) homeLink.classList.add('active');
+    }
 });

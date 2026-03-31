@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--------- Google Fonts --------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!--------- AOS CSS --------->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!--------- Font Awesome --------->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <!--------- Main CSS File --------->
@@ -62,8 +68,8 @@
         </section>
         <!--------- Home Section Ends  --------->
 
-        <!--------- About Section Ends  --------->
-        <section id="about">
+        <!--------- About Section Starts  --------->
+        <section id="about" data-aos="fade-up">
             <h1 class="sub-heading">About Me</h1>
             <div class="divider"></div>
 
@@ -121,7 +127,7 @@
         <!--------- About Section Ends  --------->
 
         <!--------- Facts Section Starts  --------->
-        <section id="fact">
+        <section id="fact" data-aos="fade-up">
             <h1 class="sub-heading">Facts</h1>
             <div class="divider"></div>
             <p class="sub-para">
@@ -131,7 +137,7 @@
 
             <div class="fact-row">
                 {% for fact in facts %}
-                <div class="fact-box">
+                <div class="fact-box" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:1 }}00">
                     <i class="{{ fact.icon_class }}"></i>
                     <strong>{{ fact.value }}</strong>
                     <p>{{ fact.title }}</p>
@@ -142,7 +148,7 @@
         <!--------- Facts Section Ends  --------->
 
         <!--------- Skills Section Starts  --------->
-        <section id="skill">
+        <section id="skill" data-aos="fade-up">
             <h1 class="sub-heading">Skills</h1>
             <div class="divider"></div>
 
@@ -168,7 +174,7 @@
         <!--------- Skills Section Ends  --------->
 
         <!--------- Resume Section Starts  --------->
-        <section id="resume">
+        <section id="resume" data-aos="fade-up">
             <h1 class="sub-heading">Resume</h1>
             <div class="divider"></div>
             <p class="sub-para">
@@ -235,8 +241,8 @@
         </section>
         <!--------- Resume Section Ends  --------->
 
-        <!--------- Portfolio Section Ends  --------->
-        <section id="portfolio">
+        <!--------- Portfolio Section Starts  --------->
+        <section id="portfolio" data-aos="fade-up">
             <h1 class="sub-heading">Portfolio</h1>
             <div class="divider"></div>
             <p class="sub-para">
@@ -246,7 +252,7 @@
 
             <div class="portfolio-row">
                 {% for project in projects %}
-                <div class="portfolio-item">
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:1 }}00">
                     <div class="portfolio-img">
                         <img src="{{ project.image.url }}" alt="{{ project.title }}">
                     </div>
@@ -267,7 +273,7 @@
         <!--------- Portfolio Section Ends  --------->
 
         <!--------- Service Section Starts  --------->
-        <section id="service">
+        <section id="service" data-aos="fade-up">
             <h1 class="sub-heading">Services</h1>
             <div class="divider"></div>
             <p class="sub-para">
@@ -293,7 +299,7 @@
         <!--------- Service Section Ends  --------->
 
         <!--------- Contact Section Starts  --------->
-        <section id="contact">
+        <section id="contact" data-aos="fade-up">
             <h1 class="sub-heading">Contact</h1>
             <div class="divider"></div>
             <p class="sub-para">
@@ -381,15 +387,27 @@
 
     <!-- ------- Typed Js ------- -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- ------- AOS Js ------- -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // AOS Initialization
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        let typedStrings = [
+            {% for text in typed_texts %}
+            "{{ text.text|escapejs }}"{% if not forloop.last %}, {% endif %}
+            {% empty %}
+            "Backend Developer!", "Cloud Engineer!", "AI Engineer!", "Freelancer!"
+            {% endfor %}
+        ];
+        
         let typed = new Typed('.auto-typed', {
-            strings: [
-                {% for text in typed_texts %}
-                "{{ text.text|escapejs }}"{% if not forloop.last %}, {% endif %}
-                {% empty %}
-                "Backend Developer!", "Cloud Engineer!", "AI Engineer!", "Freelancer!"
-                {% endfor %}
-            ],
+            strings: typedStrings,
             typeSpeed: 35,
             backSpeed: 20,
             backDelay: 2000,
