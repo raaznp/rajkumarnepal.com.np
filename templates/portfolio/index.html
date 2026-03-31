@@ -1,0 +1,702 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--------- Font Awesome --------->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!--------- Main CSS File --------->
+    <link rel="stylesheet" href="{% static 'portfolio/style.css' %}">
+    <!--------- Title --------->
+    <title>Raj Kumar Nepal - Personal Web Portfolio</title>
+</head>
+<body>
+    <!--------- Header Start --------->
+    <header>
+        <!--------- Profile --------->
+        <div class="profile">
+            <img src="https://objectstorage.ap-mumbai-1.oraclecloud.com/n/bm13gok0911e/b/rajkumar/o/profile-img.png" alt="Raj Kumar Nepal">
+            <h1>Raj K. Nepal</h1>
+            <div class="social-icons">
+                <a href="#"> <i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!--------- Navigation --------->
+        <nav>
+            <ul>
+                <li><a href="#home" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#about"><i class="fa-solid fa-user"></i> About Me</a></li>
+                <li><a href="#resume"><i class="fa-solid fa-file"></i> Resume</a></li>
+                <li><a href="#portfolio"><i class="fa-solid fa-briefcase"></i> Portfolio</a></li>
+                <li><a href="#service"><i class="fa-solid fa-server"></i> Services</a></li>
+                <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+
+        <!--------- Menu Footer  --------->
+        <div class="footer">
+            <p>&copy;2025 All Rights Reserved!<br>Designed by <a href="https://rajkumarnepal.com.np/" target="_blank">Raj Kumar Nepal</a>.</p>
+        </div>
+
+    </header>
+
+    <i class="fa-solid fa-bars" id="MenuBtn"></i>
+    <!--------- Header End --------->
+
+    <!--========================= ALL BODY CONTENTS STARTS HERE =========================-->
+    <main>
+        <!--------- Home Section Starts  --------->
+        <section id="home">
+            <div class="home-row">
+                <h1>Hi, This is <br>Raj Kumar Nepal<span>.</span></h1>
+                <p>I'm a <span class="auto-typed"></span></p>
+            </div>
+        </section>
+        <!--------- Home Section Ends  --------->
+
+        <!--------- About Section Ends  --------->
+        <section id="about">
+            <h1 class="sub-heading">About Me</h1>
+            <div class="divider"></div>
+
+            <p class="sub-para">
+                I'm a passionate backend developer specializing in creating robust and scalable solutions. With over three years of
+                experience, I focus on delivering efficient backend systems, ensuring optimal performance, and solving complex problems.
+                I enjoy exploring the latest technologies and contributing to open-source projects during my free time.
+            </p>
+
+
+            <div class="about-col">
+                <!--------- Image Cols --------->
+                <div class="img-col">
+                    <img src="https://objectstorage.ap-mumbai-1.oraclecloud.com/n/bm13gok0911e/b/rajkumar/o/profile-img.png" alt="..." width="200">
+                </div>
+
+                <!----------- Informations ----------->
+                <div class="info-col">
+                    <h2>Backend Developer</h2>
+                    <p class="sub-para">
+                        Get to  know me more along with some of my personal infos.
+                    </p>
+
+                    <div class="icon-list-col">
+                        <!--------- Left Icon List --------->
+                        <div class="icon-list">
+                            <ul>
+                                <li><i class="fa-solid fa-angle-right"></i><strong>Phone:</strong>
+                                    <span>+977-9801978829</span></li>
+                                <li><i class="fa-solid fa-angle-right"></i><strong>City:</strong> <span>Kathmandu</span>
+                                </li>
+                                <li><i class="fa-solid fa-angle-right"></i><strong>Website:</strong>
+                                    <span>https://rajkumarnepal.com.np</span></li>
+                            </ul>
+                        </div>
+
+
+                        <!--------- Right Icon List --------->
+                        <div class="icon-list">
+                            <ul>
+                                <li><i class="fa-solid fa-angle-right"></i><strong>Degree:</strong> <span>BSc. (Hons)
+                                        Cyber Security and Digital Forensics</span></li>
+                                <li><i class="fa-solid fa-angle-right"></i><strong>Email:</strong>
+                                    <span>nplrajk@gmail.com</span></li>
+                                <li><i class="fa-solid fa-angle-right"></i><strong>Freelance:</strong>
+                                    <span>Available</span></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <!--------- About Section Ends  --------->
+
+        <!--------- Facts Section Starts  --------->
+        <section id="fact">
+            <h1 class="sub-heading">Facts</h1>
+            <div class="divider"></div>
+            <p class="sub-para">
+                Here are some key achievements and metrics that highlight my dedication to excellence. They reflect my expertise,
+                commitment, and impact in the tech industry.
+            </p>
+
+            <div class="fact-row">
+                <!--------- Fact Box 1 --------->
+                <div class="fact-box">
+                    <i class="fa-regular fa-face-smile"></i>
+                    <strong>10+</strong>
+                    <p>Happy Clients</p>
+                </div>
+                <!--------- Fact Box 2 --------->
+                <div class="fact-box">
+                    <i class="fa-solid fa-file-code"></i>
+                    <strong>15+</strong>
+                    <p>Projects Completed</p>
+                </div>
+                <!--------- Fact Box 3 --------->
+                <div class="fact-box">
+                    <i class="fa-solid fa-headset"></i>
+                    <strong>24/7</strong>
+                    <p>Support Available</p>
+                </div>
+                <!--------- Fact Box 4 --------->
+                <div class="fact-box">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <strong>5+</strong>
+                    <p>Ongoing Projects</p>
+                </div>
+            </div>
+        </section>
+        <!--------- Facts Section Ends  --------->
+
+        <!--------- Skills Section Starts  --------->
+        <section id="skill">
+            <h1 class="sub-heading">Skills</h1>
+            <div class="divider"></div>
+
+            <p class="sub-para">
+                An overview of the technical skills I bring to the table as a backend developer. These skills enable me to build
+                scalable, secure, and efficient systems with precision.
+            </p>
+            <div class="skill-row">
+                <!--------- Skill Box 1 --------->
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>HTML</h2>
+                        <h2>95%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 95%;"></div>
+                    </div>
+                </div>
+
+                <!--------- Skill Box 2 --------->
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>CSS</h2>
+                        <h2>85%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <!--------- Skill Box 3 --------->
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>Javascript</h2>
+                        <h2>70%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <!--------- Skill Box 4 --------->
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>Bootstrap</h2>
+                        <h2>75%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <!--------- Skill Box 5 --------->
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>PHP</h2>
+                        <h2>65%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 65%;"></div>
+                    </div>
+                </div>
+
+                <!--------- Skill Box 6 --------->
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>Python</h2>
+                        <h2>70%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <!--------- Skill Box 7 --------->
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>Bash</h2>
+                        <h2>60%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 60%;"></div>
+                    </div>
+                </div>
+
+                <!--------- Skill Box 8 --------->
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>Wordpress</h2>
+                        <h2>85%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!--------- Skills Section Ends  --------->
+
+        <!--------- Resume Section Starts  --------->
+        <section id="resume">
+            <h1 class="sub-heading">Resume</h1>
+            <div class="divider"></div>
+            <p class="sub-para">
+                A detailed look at my professional journey, education, and accomplishments. This resume reflects my growth and expertise
+                as a backend developer to Cyber Security Analyst.
+            </p>
+
+            <div class="resume-row">
+                <!--------- Left Col --------->
+                <div class="resume-cols">
+                    <h2>Summary</h2>
+
+                    <div class="resume-item">
+                        <h3>Raj K Nepal</h3>
+                        <p>
+                            I am a proactive Cyber Security Analyst with expertise in identifying and mitigating vulnerabilities to secure IT
+                            systems. Skilled in penetration testing, SIEM monitoring, and implementing security policies, I am dedicated to
+                            protecting organizations from cyber threats along with the strong knowledge in backend and cloud.
+                        </p>
+                        <ul>
+                            <li>Tarakeshwor 9, Kathmandu, Nepal</li>
+                            <li>(977) 9801978829</li>
+                            <li>nplrajk@gmail.com</li>
+                        </ul>
+                    </div>
+
+                    <h2>Education</h2>
+
+                    <div class="resume-item">
+                        <h3>B.Sc. (Hons) Cyber Security and Digital Forensics</h3>
+                        <span class="sp-box">2024 - Running</span>
+                        <p>ISMT College (University of Sunderland), Kathmandu, NP</p>
+                    </div>
+
+                    <div class="resume-item">
+                        <h3>Intermediate/High School</h3>
+                        <span class="sp-box">2015</span>
+                        <p>Mount Everest Higher Secondary English School, Bara, NP</p>
+                    </div>
+
+                    <h2>Certifications</h2>
+
+                    <div class="resume-item">
+                        <h3>AWS Certified Cloud Practitioner</h3>
+                        <span class="sp-box">November 2024</span>
+                        <p>Amazon Web Services</p>
+                        <a href="https://www.credly.com/badges/595d8b37-b556-4848-8765-b77eb7f890c2/public_url">Verify Here</a>
+                    </div>
+
+                    <div class="resume-item">
+                        <h3>AWS re/Start Graduate</h3>
+                        <span class="sp-box">November 2024</span>
+                        <p>Amazon Web Services</p>
+                        <a href="https://www.credly.com/badges/a4ff2abe-1f49-44c0-8146-11ca0d1028ad/public_url">Verify Here</a>
+                    </div>
+
+                    <div class="resume-item">
+                        <h3>Software Engineering Essentials</h3>
+                        <span class="sp-box">March 2024</span>
+                        <p>IBM with Coursera</p>
+                        <a href="https://www.credly.com/badges/5dc85e84-55de-4ce8-99d9-f8278250568b/public_url">Verify Here</a>
+                    </div>
+
+                </div>
+
+                <!--------- Right Col --------->
+                <div class="resume-cols">
+                    <h2>Professional Experience</h2>
+
+                    <div class="resume-item">
+                        <h3>Cyber Security Analyst</h3>
+                        <span class="sp-box">Jan 2025 - Present</span>
+                        <p>Emenience Ways Pvt. Ltd., Kathmandu, NP</p>
+                        <ul>
+                            <li>Conducted vulnerability assessments and penetration testing to identify and remediate security weaknesses.</li>
+                            <li>Monitored SIEM systems and analyzed logs to detect and respond to potential threats.</li>
+                            <li>Implemented firewall rules and intrusion detection system (IDS) configurations to enhance network security.</li>
+                            <li>Assisted in developing and enforcing cybersecurity policies and risk management frameworks.</li>
+                            <li>Investigated security incidents and prepared detailed reports to support mitigation efforts.</li>
+                            <li>Supported employee security awareness programs to improve organizational resilience against cyber threats.</li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-item">
+                        <h3>AWS Re/Start Learning Experience</h3>
+                        <span class="sp-box">July 2024 - October 2024</span>
+                        <p>Unlimited Technology, Kathmandu, NP</p>
+                        <ul>
+                            <li>Developed a solid understanding of cloud computing concepts, including service models (IaaS, PaaS, SaaS) and the advantages of cloud technology.</li>
+                            <li>Gained hands-on experience with essential AWS services, such as Amazon EC2, Amazon S3, AWS Lambda, and AWS RDS for application deployment and management.</li>
+                            <li>Utilized AWS CloudFormation to automate infrastructure deployment, ensuring consistency and efficiency in cloud environments.</li>
+                            <li>Configured AWS networking services (VPC, Route 53) and implemented security best practices using AWS Identity and Access Management (IAM) and security groups.</li>
+                            <li>Explored AWS CloudWatch and AWS Cost Explorer for performance monitoring and resource optimization, focusing on cost-effective solutions.</li>
+                            <li>Engaged in team projects to design and deploy solutions, enhancing collaborative skills and troubleshooting abilities in cloud environments.</li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-item">
+                        <h3>IT Cloud Support</h3>
+                        <span class="sp-box">February 2019 - October 2023</span>
+                        <p>NepBud Infotech Pvt. Ltd., Lalitpur, NP</p>
+                        <ul>
+                            <li>Supported the deployment, configuration, and maintenance of cloud services on AWS and Oracle platforms,
+                            ensuring high availability and performance.</li>
+                            <li>Provided technical support to clients, diagnosing and resolving issues related to cloud applications, infrastructure,
+                            and networking.</li>
+                            <li>Monitored system performance using AWS CloudWatch and other tools, identifying bottlenecks and implementing
+                            optimization strategies to improve efficiency.</li>
+                            <li>Developed and maintained backup solutions and disaster recovery plans to ensure data integrity and business
+                            continuity for client applications.</li>
+                            <li>Conducted training sessions for users on cloud services and applications and created comprehensive documentation
+                            for troubleshooting and operational procedures.</li>
+                            <li>Worked closely with cross-functional teams to support project initiatives, ensuring alignment of IT solutions with
+                            business goals.</li>
+                            <li>Implemented security measures in cloud environments, including IAM policies and security group configurations,
+                            to protect client data and resources.</li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-item">
+                        <h3>Digital Marketing Officer</h3>
+                        <span class="sp-box">May 2016 - January 2019</span>
+                        <p>NepBud Infotech Pvt. Ltd., Lalitpur, NP</p>
+                        <ul>
+                            <li>Developed and executed comprehensive digital marketing strategies to enhance brand visibility and drive customer
+                            engagement across various online platforms.</li>
+                            <li>Led the creation and management of high-quality content for websites, blogs, and social media channels, aligning
+                            with the brand's voice and marketing objectives.</li>
+                            <li>Implemented SEO best practices to improve organic search rankings, and managed PPC campaigns to maximize
+                            ROI on advertising spend.</li>
+                            <li>Oversaw social media marketing efforts, including strategy development, content scheduling, and community
+                            engagement, resulting in increased followers and brand loyalty.</li>
+                            <li>Designed and executed targeted email marketing campaigns, analyzing performance metrics to optimize
+                            engagement and conversion rates.</li>
+                            <li>Utilized tools like Google Analytics and social media insights to track campaign performance, generating reports
+                            to inform strategy adjustments and decision-making.</li>
+                            <li>Managed a team of marketing professionals, fostering a collaborative environment and ensuring alignment with
+                            overall business goals and objectives.</li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-item">
+                        <h3>Computer Science Teacher</h3>
+                        <span class="sp-box">May 2013 - September 2015</span>
+                        <p>Mount Everest Higher Secondary English School, Bara, NP</p>
+                        <ul>
+                            <li>Implemented engaging computer science curricula for students, covering foundational topics such as programming,
+                            algorithms, and data structures.</li>
+                            <li>Delivered high-quality instruction in computer science concepts, utilizing various teaching methods to
+                            accommodate different learning styles and enhance student comprehension.</li>
+                            <li>Developed and administered assessments to evaluate student performance, providing constructive feedback to
+                            support their academic growth.</li>
+                            <li>Organized and facilitated computer clubs and coding workshops, fostering students' interest in technology and
+                            encouraging participation in competitions.</li>
+                            <li>Integrated modern technology and educational tools into the classroom to enhance learning experiences and prepare
+                            students for the digital world.</li>
+                            <li>Provided one-on-one mentoring to students, offering guidance on academic and career pathways in computer
+                            science and related fields.</li>
+                            <li>Collaborated with other teachers to integrate computer science concepts across various subjects, promoting
+                            interdisciplinary learning.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <!--------- Resume Section Ends  --------->
+
+        <!--------- Portfolio Section Ends  --------->
+        <section id="portfolio">
+            <h1 class="sub-heading">Portfolio</h1>
+            <div class="divider"></div>
+            <p class="sub-para">
+                A showcase of projects that highlight my expertise in backend development. Each project demonstrates my ability to solve
+                complex problems and deliver scalable solutions.
+            </p>
+
+            <div class="portfolio-row">
+                <!-- Portfolio Item 1-->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://cdn.dribbble.com/users/4854826/screenshots/18336709/media/af54303e59dfc8102d95b47f66211fe5.jpg" alt="JobBoard">
+                    </div>
+                    <div class="portfolio-info">
+                        <h2>JobBoard</h2>
+                        <p>Developed a job board platform that connects job seekers with employers, featuring advanced search filters and real-time
+                        notifications.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2-->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://getcommerce.xyz/storage/img/gjQ9WZpCo7wDYJ0zBR675GkZU4Ta23Z7SRjKyLFU.jpg" alt="E-Commerce Backend">
+                    </div>
+                    <div class="portfolio-info">
+                        <h2>E-Commerce Backend</h2>
+                        <p>Designed and implemented a highly scalable backend for an e-commerce platform, featuring secure payment gateways and a
+                        recommendation engine.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3-->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://www.slideteam.net/wp/wp-content/uploads/2022/12/Dashboard-for-Threat-Tracking-in-Cyber-Security.png" alt="CyberSec Dashboard">
+                    </div>
+                    <div class="portfolio-info">
+                        <h2>CyberSec Dashboard</h2>
+                        <p>Created a dashboard for monitoring network activity and detecting threats using machine learning algorithms.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4-->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://cdn.prod.website-files.com/6284f7327b63a63510a796c8/649e562c4874365688af5ab6_getphyllo%20Thumbnail%20(6).webp" alt="SocialConnect API">
+                    </div>
+                    <div class="portfolio-info">
+                        <h2>SocialConnect API</h2>
+                        <p>Built a RESTful API for a social media application allowing users to post, like, comment, and follow each other.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5-->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://images.prismic.io/qovery/ZrHyJ0aF0TcGItZJ_unnamed-1-.png?auto=format,compress" alt="DevOps Automation Tool">
+                    </div>
+                    <div class="portfolio-info">
+                        <h2>DevOps Automation Tool</h2>
+                        <p>Developed an automation tool for CI/CD pipelines, integrating with Jenkins, Docker, and Kubernetes.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 6-->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://images.prismic.io/veriff/ZnvhupbWFbowe3a__24-AML-header-illustration.png" alt="KYC Verification System">
+                    </div>
+                    <div class="portfolio-info">
+                        <h2>KYC Verification System</h2>
+                        <p>Designed a secure and compliant KYC verification system for onboarding users with real-time document verification.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </section>
+        <!--------- Portfolio Section Ends  --------->
+
+        <!--------- Service Section Starts  --------->
+        <section id="service">
+            <h1 class="sub-heading">Services</h1>
+            <div class="divider"></div>
+            <p class="sub-para">
+                Comprehensive services tailored to meet your backend development needs. From building scalable systems to ensuring
+                top-notch security, I've got you covered.
+            </p>
+
+            <div class="service-row">
+                <!--------- Service Box 1 --------->
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-file-code"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Frontend Development</h3>
+                        <p>
+                            Building responsive and dynamic interfaces with modern frontend frameworks like React and Vue.js.
+                        </p>
+                    </div>
+                </div>
+
+                <!--------- Service Box 2 --------->
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Backend Development</h3>
+                        <p>
+                            Developing APIs, services, and databases for scalable and secure applications.
+                        </p>
+                    </div>
+                </div>
+
+                <!--------- Service Box 3 --------->
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Server Management</h3>
+                        <p>
+                            Managing Linux and Windows Servers, ensuring high availability and performance.
+                        </p>
+                    </div>
+                </div>
+
+                <!--------- Service Box 4 --------->
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Database Management</h3>
+                        <p>
+                            Designing efficient database schemas and optimizing query performance.
+                        </p>
+                    </div>
+                </div>
+
+                <!--------- Service Box 5 --------->
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Cloud Services</h3>
+                        <p>
+                            Deploying and managing applications on AWS, GCP, and Azure platforms.
+                        </p>
+                    </div>
+                </div>
+
+                <!--------- Service Box 6 --------->
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-shield"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Cyber Security</h3>
+                        <p>
+                            Conducting vulnerability assessments and implementing security best practices.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!--------- Service Section Ends  --------->
+
+        <!--------- Contact Section Starts  --------->
+        <section id="contact">
+            <h1 class="sub-heading">Contact</h1>
+            <div class="divider"></div>
+            <p class="sub-para">
+                Get in touch to discuss opportunities, collaborations, or inquiries. I'm always open to connecting and helping bring
+                your ideas to life.
+            </p>
+
+            <div class="contact-row">
+                <!--------- Contact Details --------->
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="info">
+                            <h3>Email:</h3>
+                            <p>nplrajk@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="info">
+                            <h3>Call:</h3>
+                            <p>(977)-9801978829</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div class="info">
+                            <h3>Website:</h3>
+                            <p>https://rajkumarnepal.com.np</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="info">
+                            <h3>Location:</h3>
+                            <p>Tarakeshwor 9, Kathmandu, Nepal</p>
+                        </div>
+                    </div>
+
+                    <!--------- Google Map --------->
+
+                    <div class="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d89232.65929258635!2d85.21612832945303!3d27.779206764327867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1f1660f01d15%3A0x6bc8f6a111170a6d!2sTarakeshwar!5e0!3m2!1sen!2snp!4v1737044519452!5m2!1sen!2snp" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                </div>
+                <!--------- Contact Form --------->
+                <div class="contact-form">
+
+                    <form action="#" method="POST">
+                        <input type="text" name="name" id="name" placeholder="Your Name" required>
+                        <input type="email" name="email" id="email" placeholder="Your Email" required>
+                        <input type="text" name="subject" id="subject" placeholder="Subject" required>
+                        <textarea name="message" id="message" rows="9" placeholder="Your Message" required></textarea>
+                        <input type="submit" value="Send Message">
+                    </form>
+
+                </div>
+            </div>
+
+        </section>
+        <!-- ------- Contact Section Ends  ------- -->
+
+    </main>
+    <!-- ========================= ALL BODY CONTENTS ENDS HERE ========================= -->
+
+    <!-- ------- Typed Js ------- -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- ------- Main JS ------- -->
+    <script src="{% static 'portfolio/main.js' %}"></script>
+</body>
+</html>
