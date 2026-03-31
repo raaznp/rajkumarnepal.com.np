@@ -158,7 +158,7 @@
                         <h2>{{ skill.percentage }}%</h2>
                     </div>
                     <div class="skill-outer-line">
-                        <div class="skill-inner-line" style="width: {{ skill.percentage }}%;"></div>
+                        <div class="skill-inner-line" style="width: {{ skill.percentage|default:0 }}%;"></div>
                     </div>
                 </div>
                 {% endfor %}
@@ -382,13 +382,19 @@
     <!-- ------- Typed Js ------- -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
-        let typed = new Typed('.auto-typed',{
-            strings: [{% for text in typed_texts %}'{{ text.text }}',{% empty %}'Backend Developer!', 'Cloud Engineer!', 'AI Engineer!', 'Freelancer!'{% endfor %}],
+        let typed = new Typed('.auto-typed', {
+            strings: [
+                {% for text in typed_texts %}
+                "{{ text.text|escapejs }}"{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                "Backend Developer!", "Cloud Engineer!", "AI Engineer!", "Freelancer!"
+                {% endfor %}
+            ],
             typeSpeed: 35,
             backSpeed: 20,
             backDelay: 2000,
-            loop: true,
-        })
+            loop: true
+        });
     </script>
     <!-- ------- Main JS ------- -->
     <script src="{% static 'portfolio/main.js' %}"></script>
