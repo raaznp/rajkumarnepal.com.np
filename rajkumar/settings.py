@@ -32,7 +32,7 @@ SECRET_KEY = env('SECRET_KEY', default='tx!udfro9br9s=qelm1h7=z_dny$ee&=+cc1#+4v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
 
 ALLOWED_HOSTS = ['rajkumarnepal.com.np','www.rajkumarnepal.com.np', 'localhost','127.0.0.1']
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'storages',
     'portfolio',
     'dash',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -192,4 +193,11 @@ else:
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+# Custom User Model
+AUTH_USER_MODEL = 'users.CustomUser'
+
+# Auth URLs
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = 'dash_home'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
