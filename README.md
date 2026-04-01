@@ -1,24 +1,46 @@
-# rajkumarnepal.com.np
-🌱 I am Raj Kumar Nepal, passionate Cyber Security Enthusiast, currently studying Bachelors (Hons.) of Cyber Security and DIgital Forensics.
+# 🚀 Personal Web Portfolio - Raj Kumar Nepal
+🌱 I am **Raj Kumar Nepal**, a passionate **AI Engineer**, **Cloud Enthusiast**, and **Backend Specialist**. 
 
-This is my personal site made in python django.
+🎓 Currently pursuing my Bachelors (Hons.) in **Cyber Security and Digital Forensics**, I leverage my security background to build intelligent, resilient, and scalable AI solutions on the cloud.
 
-If you want to clone and use this site as your own personal portfolio, feel free to do so.
+This is my personal portfolio site, meticulously built using **Python Django**, designed to showcase projects, skills, and professional experience with a modern, high-performance edge.
 
-## Steps to Follow
+---
+💡 **Want to build your own?** Feel free to clone this repository and use it as a foundation for your own professional portfolio!
 
-mkdir personal-site && cd personal-site
+## 🛠 Setup & Installation
 
-python -m venv env
+1. Create a project directory:
+   ```powershell
+   mkdir personal-site
+   cd personal-site
+   ```
 
-source env/bin/activate
+2. Set up a virtual environment:
+   ```powershell
+   python -m venv env
+   .\env\Scripts\activate
+   ```
 
-git clone https://github.com/raaznp/rajkumarnepal.com.np.git . //Cloned in same folder
+3. Clone the repository:
+   ```powershell
+   git clone https://github.com/raaznp/rajkumarnepal.com.np.git .
+   ```
 
-pip install -r requirements.txt
+4. Install dependencies:
+   ```powershell
+   pip install -r requirements.txt
+   ```
 
-python manage.py collectstatic
+5. Initialize the database and static files:
+   ```powershell
+   python manage.py migrate
+   python manage.py collectstatic
+   ```
 
-python manage.py runserver
+6. Launch the development server:
+   ```powershell
+   python manage.py runserver
+   ```
 
-TaDaa!!..
+✨ **Live at:** [rajkumarnepal.com.np](https://rajkumarnepal.com.np)

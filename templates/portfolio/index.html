@@ -14,8 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <!--------- Main CSS File --------->
     <link rel="stylesheet" href="{% static 'portfolio/style.css' %}">
+    <!--------- SEO Meta Tags --------->
+    <meta name="description" content="{{ profile.about_text|truncatewords:40|default:'Personal Web Portfolio of Raj Kumar Nepal - AI Engineer, Cloud Enthusiast, and Backend Specialist' }}">
+    <meta name="keywords" content="Raj Kumar Nepal, Portfolio, AI Engineer, Cloud Enthusiast, Backend Specialist, Python, Django, AWS, Oracle Cloud">
+    <meta name="author" content="{{ profile.name|default:'Raj Kumar Nepal' }}">
     <!--------- Title --------->
-    <title>Raj Kumar Nepal - Personal Web Portfolio</title>
+    <title>{{ profile.name|default:"Raj Kumar Nepal" }} - Personal Web Portfolio</title>
 </head>
 <body>
     <!--------- Header Start --------->
@@ -31,6 +35,11 @@
             <div class="social-icons">
                 {% for link in social_links %}
                 <a href="{{ link.url }}" target="_blank"><i class="fa-brands {{ link.icon_class }}"></i></a>
+                {% empty %}
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
                 {% endfor %}
             </div>
         </div>
@@ -49,7 +58,7 @@
 
         <!--------- Menu Footer  --------->
         <div class="footer">
-            <p>&copy;2025 All Rights Reserved!<br>Powered by <a href="https://merocms/" target="_blank">MeroCMS</a><br/>Designed by <a href="https://rajkumarnepal.com.np/" target="_blank">Raj Kumar Nepal</a>.</p>
+            <p>&copy; {% now "Y" %} {{ profile.name|default:"Raj Kumar Nepal" }} <br>All Rights Reserved! <br>Powered by <a href="https://merocms.com/" target="_blank">MeroCMS</a></p>
         </div>
 
     </header>
@@ -74,7 +83,7 @@
             <div class="divider"></div>
 
             <p class="sub-para">
-                {{ profile.about_text|default:"I'm a passionate backend developer specializing in creating robust and scalable solutions." }}
+                {{ profile.about_text|default:"I am a passionate AI Engineer, Cloud Enthusiast, and Backend Specialist dedicated to building intelligent, scalable, and resilient systems." }}
             </p>
 
 
@@ -88,7 +97,7 @@
 
                 <!----------- Informations ----------->
                 <div class="info-col">
-                    <h2>{{ profile.degree|default:"Backend Developer" }}</h2>
+                    <h2>{{ profile.degree|default:"AI Engineer & Cloud Enthusiast" }}</h2>
                     <p class="sub-para">
                         Get to know me more along with some of my personal infos.
                     </p>
@@ -98,11 +107,11 @@
                         <div class="icon-list">
                             <ul>
                                 <li><i class="fa-solid fa-angle-right"></i><strong>Phone:</strong>
-                                    <span>{{ profile.phone }}</span></li>
-                                <li><i class="fa-solid fa-angle-right"></i><strong>City:</strong> <span>{{ profile.city }}</span>
+                                    <span>{{ profile.phone|default:"+977-9800000000" }}</span></li>
+                                <li><i class="fa-solid fa-angle-right"></i><strong>City:</strong> <span>{{ profile.city|default:"Kathmandu, Nepal" }}</span>
                                 </li>
                                 <li><i class="fa-solid fa-angle-right"></i><strong>Website:</strong>
-                                    <span>{{ profile.website }}</span></li>
+                                    <span>{{ profile.website|default:"www.rajkumarnepal.com.np" }}</span></li>
                             </ul>
                         </div>
 
@@ -110,11 +119,11 @@
                         <!--------- Right Icon List --------->
                         <div class="icon-list">
                             <ul>
-                                <li><i class="fa-solid fa-angle-right"></i><strong>Degree:</strong> <span>{{ profile.degree }}</span></li>
+                                <li><i class="fa-solid fa-angle-right"></i><strong>Degree:</strong> <span>{{ profile.degree|default:"Cyber Security (Hons.)" }}</span></li>
                                 <li><i class="fa-solid fa-angle-right"></i><strong>Email:</strong>
-                                    <span>{{ profile.email }}</span></li>
+                                    <span>{{ profile.email|default:"info@rajkumarnepal.com.np" }}</span></li>
                                 <li><i class="fa-solid fa-angle-right"></i><strong>Freelance:</strong>
-                                    <span>{% if profile.freelance_status %}Available{% else %}Unavailable{% endif %}</span></li>
+                                    <span>{% if profile.freelance_status %}Available{% else %}Available{% endif %}</span></li>
                             </ul>
                         </div>
 
@@ -142,6 +151,17 @@
                     <strong>{{ fact.value }}</strong>
                     <p>{{ fact.title }}</p>
                 </div>
+                {% empty %}
+                <div class="fact-box" data-aos="zoom-in">
+                    <i class="fa-solid fa-code"></i>
+                    <strong>5+</strong>
+                    <p>Years Experience</p>
+                </div>
+                <div class="fact-box" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <strong>50+</strong>
+                    <p>Projects Done</p>
+                </div>
                 {% endfor %}
             </div>
         </section>
@@ -167,6 +187,34 @@
                         <div class="skill-inner-line" style="width: {{ skill.percentage|default:0 }}%;"></div>
                     </div>
                 </div>
+                {% empty %}
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>AI & Machine Learning (Python/PyTorch)</h2>
+                        <h2>90%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>Scalable Backend Systems (Django/REST)</h2>
+                        <h2>95%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 95%;"></div>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <h2>Cloud Infrastructure & Ops (AWS/Oracle)</h2>
+                        <h2>85%</h2>
+                    </div>
+                    <div class="skill-outer-line">
+                        <div class="skill-inner-line" style="width: 85%;"></div>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
 
@@ -179,7 +227,7 @@
             <div class="divider"></div>
             <p class="sub-para">
                 A detailed look at my professional journey, education, and accomplishments. This resume reflects my growth and expertise
-                as a backend developer to Cyber Security Analyst.
+                as an AI Engineer and Cloud Infrastructure Specialist.
             </p>
 
             <div class="resume-row">
@@ -204,6 +252,12 @@
                         <span class="sp-box">{{ edu.duration }}</span>
                         <p>{{ edu.institution }}</p>
                     </div>
+                    {% empty %}
+                    <div class="resume-item">
+                        <h3>Your Degree Title</h3>
+                        <span class="sp-box">2018 - 2022</span>
+                        <p>University Name, Location</p>
+                    </div>
                     {% endfor %}
 
                     <h2>Certifications</h2>
@@ -215,6 +269,12 @@
                         {% if cert.verification_url %}
                         <a href="{{ cert.verification_url }}" target="_blank">Verify Here</a>
                         {% endif %}
+                    </div>
+                    {% empty %}
+                    <div class="resume-item">
+                        <h3>Relevant Certification</h3>
+                        <span class="sp-box">2023</span>
+                        <p>Issuing Organization</p>
                     </div>
                     {% endfor %}
 
@@ -246,7 +306,7 @@
             <h1 class="sub-heading">Portfolio</h1>
             <div class="divider"></div>
             <p class="sub-para">
-                A showcase of projects that highlight my expertise in backend development. Each project demonstrates my ability to solve
+                A showcase of projects that highlight my expertise in AI, Cloud, and Backend development. Each project demonstrates my ability to solve
                 complex problems and deliver scalable solutions.
             </p>
 
@@ -262,6 +322,16 @@
                         {% if project.url %}
                         <a href="{{ project.url }}" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
                         {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <div class="portfolio-item" data-aos="zoom-in">
+                    <div class="portfolio-img">
+                        <img src="https://objectstorage.ap-mumbai-1.oraclecloud.com/n/bm13gok0911e/b/rajkumar/o/portfolio-img.png" alt="Placeholder Project">
+                    </div>
+                    <div class="portfolio-info">
+                        <h2>Coming Soon...</h2>
+                        <p>I am working on some exciting new projects. Stay tuned!</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -290,6 +360,34 @@
                     <div class="service-info">
                         <h3>{{ service.title }}</h3>
                         <p>{{ service.description }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>AI Solution Development</h3>
+                        <p>Building intelligent systems and predictive models to solve complex problems.</p>
+                    </div>
+                </div>
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Scalable Backend Architecture</h3>
+                        <p>Developing high-performance, resilient APIs and backend systems with Python & Django.</p>
+                    </div>
+                </div>
+                <div class="service-box">
+                    <div class="icon">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Cloud Infrastructure Architect</h3>
+                        <p>Designing scalable, resilient architectures for reliable systems.</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -402,7 +500,7 @@
             {% for text in typed_texts %}
             "{{ text.text|escapejs }}"{% if not forloop.last %}, {% endif %}
             {% empty %}
-            "Backend Developer!", "Cloud Engineer!", "AI Engineer!", "Freelancer!"
+            "AI Engineer!", "Cloud Enthusiast!", "Backend Specialist!", "Cloud Architect!", "Freelancer!"
             {% endfor %}
         ];
         
