@@ -25,4 +25,7 @@ urlpatterns = [
     path('users/', views.user_list, name='user_list'),
     path('users/add/', views.add_user, name='add_user'),
     path('users/edit/<int:pk>/', views.edit_user, name='edit_user'),
+    
+    # Account Settings
+    path('settings/', views.account_settings, name='account_settings'),
 ]

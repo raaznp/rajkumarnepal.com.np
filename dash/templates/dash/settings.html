@@ -1,0 +1,111 @@
+{% extends 'dash/base.html' %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block header_title %}Account Settings{% endblock %}
+
+{% block content %}
+<div style="max-width: 1000px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 320px 1fr; gap: 40px; align-items: start;">
+        
+        <!-- Profile Overview Card -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; text-align: center;">
+            <div style="position: relative; width: 140px; height: 140px; margin: 0 auto 24px;">
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" style="width: 100%; height: 100%; border-radius: 30px; object-fit: cover; border: 4px solid var(--primary);">
+                {% else %}
+                    <div style="width: 100%; height: 100%; border-radius: 30px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; border: 4px solid var(--border);">
+                        {{ user.username|first|upper }}
+                    </div>
+                {% endif %}
+                <div style="position: absolute; bottom: -10px; right: -10px; width: 40px; height: 40px; background: var(--bg-dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); color: var(--primary-light);">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+            </div>
+
+            <h3 style="margin: 0 0 4px; font-size: 1.25rem;">{{ user.get_full_name|default:user.username }}</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">{{ user.email }}</p>
+
+            <div style="text-align: left; background: rgba(15, 23, 42, 0.4); padding: 20px; border-radius: 16px; border: 1px solid var(--border);">
+                <div style="margin-bottom: 12px;">
+                    <span style="display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px;">Role</span>
+                    <span style="font-weight: 600; font-size: 0.9rem;">
+                        {% if user.is_superuser %}Superuser{% elif user.is_staff %}Staff Member{% else %}Regular User{% endif %}
+                    </span>
+                </div>
+                <div>
+                    <span style="display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px;">Member Since</span>
+                    <span style="font-weight: 600; font-size: 0.9rem;">{{ user.date_joined|date:"M d, Y" }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Profile Form -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 40px;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 32px; font-weight: 600;">Edit Profile Information</h2>
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 24px;">
+                    <label>Username</label>
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 24px;">
+                    <label>Email Address</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 32px;">
+                    <label>Profile Picture</label>
+                    <div style="margin-top: 8px;">
+                        {{ form.profile_picture }}
+                    </div>
+                </div>
+
+                <button type="submit" style="width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);">
+                    <i class="fa-solid fa-check-circle" style="margin-right: 8px;"></i> Update Account Settings
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-group label {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+    input[type="text"], input[type="email"], select, textarea {
+        width: 100%;
+        padding: 14px 16px;
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    }
+</style>
+{% endblock %}

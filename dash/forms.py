@@ -2,6 +2,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
+class UserProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email', 'first_name', 'last_name', 'profile_picture')
+
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -54,3 +54,21 @@ def edit_user(request, pk):
     else:
         form = CustomUserChangeForm(instance=user_obj)
     return render(request, 'dash/user_form.html', {'form': form, 'title': f'Edit User: {user_obj.username}'})
+
+@login_required
+def account_settings(request):
+    """View to allow logged-in users to update their own profile."""
+    if request.method == 'POST':
+        form = UserProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile settings have been updated!')
+            return redirect('account_settings')
+    else:
+        form = UserProfileUpdateForm(instance=request.user)
+    render_data = {
+        'form': form,
+        'title': 'Account Settings',
+        'active_tab': 'settings'
+    }
+    return render(request, 'dash/settings.html', render_data)
