@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
-from portfolio.models import Profile, Project, Skill, Experience, Education, Certification
+from portfolio.models import Profile, Project, Skill, Experience, Education, Certification, Service, SocialLink
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -42,6 +42,19 @@ class EducationForm(forms.ModelForm):
 class CertificationForm(forms.ModelForm):
     class Meta:
         model = Certification
+        fields = '__all__'
+
+class ServiceForm(forms.ModelForm):
+    class Meta:
+        model = Service
+        fields = '__all__'
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 3}),
+        }
+
+class SocialLinkForm(forms.ModelForm):
+    class Meta:
+        model = SocialLink
         fields = '__all__'
 
 class UserProfileUpdateForm(forms.ModelForm):

@@ -60,4 +60,15 @@ urlpatterns = [
     path('portfolio/certification/add/', views.certification_add, name='certification_add'),
     path('portfolio/certification/edit/<int:pk>/', views.certification_edit, name='certification_edit'),
     path('portfolio/certification/delete/<int:pk>/', views.certification_delete, name='certification_delete'),
+    
+    # Services CRUD
+    path('portfolio/services/', views.service_list, name='service_list'),
+    path('portfolio/services/add/', views.service_add, name='service_add'),
+    path('portfolio/services/edit/<int:pk>/', views.service_edit, name='service_edit'),
+    path('portfolio/services/delete/<int:pk>/', views.service_delete, name='service_delete'),
+    
+    # Social Links CRUD
+    path('portfolio/social/add/', views.social_add, name='social_add'),
+    path('portfolio/social/edit/<int:pk>/', views.social_edit, name='social_edit'),
+    path('portfolio/social/delete/<int:pk>/', views.social_delete, name='social_delete'),
 ]

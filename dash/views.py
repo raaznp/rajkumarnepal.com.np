@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm, ServiceForm, SocialLinkForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -295,3 +295,79 @@ def certification_delete(request, pk):
         messages.success(request, 'Certification deleted!')
         return redirect('education_list')
     return render(request, 'dash/confirm_delete.html', {'object': cert, 'type': 'Certification'})
+
+# Services & Social Links views
+@login_required
+def service_list(request):
+    """View to list both services and social links."""
+    services = Service.objects.all()
+    socials = SocialLink.objects.all()
+    return render(request, 'dash/services_list.html', {'services': services, 'socials': socials})
+
+@login_required
+def service_add(request):
+    if request.method == 'POST':
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Service added!')
+            return redirect('service_list')
+    else:
+        form = ServiceForm()
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Add Service'})
+
+@login_required
+def service_edit(request, pk):
+    service = get_object_or_404(Service, pk=pk)
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, instance=service)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Service updated!')
+            return redirect('service_list')
+    else:
+        form = ServiceForm(instance=service)
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Edit Service'})
+
+@login_required
+def service_delete(request, pk):
+    service = get_object_or_404(Service, pk=pk)
+    if request.method == 'POST':
+        service.delete()
+        messages.success(request, 'Service deleted!')
+        return redirect('service_list')
+    return render(request, 'dash/confirm_delete.html', {'object': service, 'type': 'Service'})
+
+@login_required
+def social_add(request):
+    if request.method == 'POST':
+        form = SocialLinkForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Social link added!')
+            return redirect('service_list')
+    else:
+        form = SocialLinkForm()
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Add Social Link'})
+
+@login_required
+def social_edit(request, pk):
+    social = get_object_or_404(SocialLink, pk=pk)
+    if request.method == 'POST':
+        form = SocialLinkForm(request.POST, instance=social)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Social link updated!')
+            return redirect('service_list')
+    else:
+        form = SocialLinkForm(instance=social)
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Edit Social Link'})
+
+@login_required
+def social_delete(request, pk):
+    social = get_object_or_404(SocialLink, pk=pk)
+    if request.method == 'POST':
+        social.delete()
+        messages.success(request, 'Social link deleted!')
+        return redirect('service_list')
+    return render(request, 'dash/confirm_delete.html', {'object': social, 'type': 'Social Link'})

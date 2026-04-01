@@ -261,6 +261,10 @@
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span>Education</span>
             </a>
+            <a href="{% url 'service_list' %}" class="nav-item {% if 'services' in request.path or 'social' in request.path %}active{% endif %}">
+                <i class="fa-solid fa-handshake"></i>
+                <span>Services</span>
+            </a>
 
             <div class="nav-label">Management</div>
             <a href="{% url 'user_list' %}" class="nav-item {% if 'users' in request.path %}active{% endif %}">

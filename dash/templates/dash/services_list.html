@@ -1,0 +1,94 @@
+{% extends 'dash/base.html' %}
+
+{% block title %}Services & Social Presence{% endblock %}
+
+{% block header_title %}Expertise & Reach{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: start;">
+    
+    <!-- Services Section -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+            <div>
+                <h2 style="font-size: 1.25rem; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 12px;">
+                    <i class="fa-solid fa-hand-holding-heart" style="color: var(--primary);"></i> My Services
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin: 4px 0 0;">Manage the professional services you offer.</p>
+            </div>
+            <a href="{% url 'service_add' %}" style="padding: 10px 20px; background: var(--primary); color: white; border-radius: 12px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);">
+                <i class="fa-solid fa-plus"></i> Add Service
+            </a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+            {% for s in services %}
+            <div style="padding: 24px; border: 1px solid var(--border); border-radius: 16px; background: rgba(15, 23, 42, 0.3); transition: 0.3s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="display: flex; gap: 20px;">
+                        <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(99, 102, 241, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
+                            <i class="{{ s.icon_class }}"></i>
+                        </div>
+                        <div>
+                            <h3 style="margin: 0 0 6px; font-size: 1.1rem; font-weight: 600;">{{ s.title }}</h3>
+                            <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">{{ s.description }}</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="{% url 'service_edit' s.pk %}" style="color: var(--primary-light); font-size: 0.9rem; text-decoration: none; padding: 8px; background: rgba(255,255,255,0.05); border-radius: 8px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'service_delete' s.pk %}" style="color: #ef4444; font-size: 0.9rem; text-decoration: none; padding: 8px; background: rgba(239, 68, 68, 0.05); border-radius: 8px;"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div style="text-align: center; padding: 40px; border: 1px dashed var(--border); border-radius: 16px;">
+                <p style="color: var(--text-muted); margin: 0;">No services listed yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Social Links Section -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+            <div>
+                <h2 style="font-size: 1.25rem; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 12px;">
+                    <i class="fa-solid fa-link" style="color: #10b981;"></i> Social Profiles
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin: 4px 0 0;">Your digital footprint across the web.</p>
+            </div>
+            <a href="{% url 'social_add' %}" style="padding: 8px 16px; background: #10b981; color: white; border-radius: 10px; text-decoration: none; font-size: 0.8rem; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);">
+                <i class="fa-solid fa-plus"></i> Add Link
+            </a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            {% for soc in socials %}
+            <div style="padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: rgba(15, 23, 42, 0.2); display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; border: 1px solid var(--border);">
+                        <i class="{{ soc.icon_class }}"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600;">{{ soc.platform }}</h4>
+                        <a href="{{ soc.url }}" target="_blank" style="font-size: 0.8rem; color: var(--primary-light); text-decoration: none;">View Link <i class="fa-solid fa-up-right-from-square" style="font-size: 0.7rem;"></i></a>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <a href="{% url 'social_edit' soc.pk %}" style="color: var(--text-muted); font-size: 0.85rem;"><i class="fa-solid fa-pen"></i></a>
+                    <a href="{% url 'social_delete' soc.pk %}" style="color: #ef4444; font-size: 0.85rem;"><i class="fa-solid fa-trash"></i></a>
+                </div>
+            </div>
+            {% empty %}
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">No social links added.</p>
+            {% endfor %}
+        </div>
+        
+        <div style="margin-top: 32px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-radius: 16px; border: 1px dashed rgba(16, 185, 129, 0.2);">
+            <h5 style="margin: 0 0 8px; font-size: 0.85rem; color: #10b981; font-weight: 600;">Pro Tip:</h5>
+            <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">Use FontAwesome classes for icons (e.g., <code style="color: white; background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 4px;">fa-brands fa-github</code>).</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
