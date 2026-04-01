@@ -1,0 +1,61 @@
+{% extends 'dash/base.html' %}
+
+{% block title %}Inbox - Contact Messages{% endblock %}
+
+{% block header_title %}Communication Inbox{% endblock %}
+
+{% block content %}
+<div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);">
+    <div style="margin-bottom: 32px;">
+        <h2 style="font-size: 1.5rem; font-weight: 600; margin: 0;">Messages</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 4px 0 0;">Review inquiries from your portfolio contact form.</p>
+    </div>
+
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0 12px; text-align: left;">
+            <thead>
+                <tr>
+                    <th style="padding: 0 20px 10px; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600;">Status</th>
+                    <th style="padding: 0 20px 10px; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600;">Sender</th>
+                    <th style="padding: 0 20px 10px; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600;">Subject</th>
+                    <th style="padding: 0 20px 10px; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600;">Date</th>
+                    <th style="padding: 0 20px 10px; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600; text-align: right;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in messages_list %}
+                <tr style="background: rgba(15, 23, 42, 0.3); border-radius: 12px; transition: 0.3s; cursor: pointer;" onmouseover="this.style.background='rgba(15, 23, 42, 0.5)'" onmouseout="this.style.background='rgba(15, 23, 42, 0.3)'" onclick="window.location='{% url 'message_detail' m.pk %}'">
+                    <td style="padding: 20px; border-radius: 12px 0 0 12px;">
+                        {% if not m.is_read %}
+                        <span style="width: 10px; height: 10px; background: var(--primary); border-radius: 50%; display: inline-block;" title="Unread"></span>
+                        {% else %}
+                        <span style="width: 10px; height: 10px; background: rgba(255,255,255,0.1); border-radius: 50%; display: inline-block;"></span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 20px;">
+                        <div style="font-weight: 600; font-size: 0.95rem;">{{ m.name }}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">{{ m.email }}</div>
+                    </td>
+                    <td style="padding: 20px;">
+                        <span style="font-weight: 500;">{{ m.subject }}</span>
+                    </td>
+                    <td style="padding: 20px;">
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">{{ m.timestamp|date:"M d, H:i" }}</span>
+                    </td>
+                    <td style="padding: 20px; text-align: right; border-radius: 0 12px 12px 0;" onclick="event.stopPropagation()">
+                        <a href="{% url 'message_delete' m.pk %}" style="color: #ef4444; font-size: 0.9rem; text-decoration: none; padding: 8px; border-radius: 8px; background: rgba(239, 68, 68, 0.05);"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="padding: 60px; text-align: center; color: var(--text-muted);">
+                        <i class="fa-solid fa-envelope-open" style="font-size: 3rem; margin-bottom: 20px; display: block; opacity: 0.2;"></i>
+                        No messages in your inbox.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

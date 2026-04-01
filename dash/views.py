@@ -447,3 +447,29 @@ def fact_delete(request, pk):
         messages.success(request, 'Fact deleted!')
         return redirect('personalization_list')
     return render(request, 'dash/confirm_delete.html', {'object': fact, 'type': 'Fact'})
+
+# Communication views (Contact Messages)
+@login_required
+def message_list(request):
+    """Inbox view for contact messages."""
+    messages_list = ContactMessage.objects.all().order_by('-timestamp')
+    return render(request, 'dash/message_list.html', {'messages_list': messages_list})
+
+@login_required
+def message_detail(request, pk):
+    """View to read a specific message and mark it as read."""
+    msg = get_object_or_404(ContactMessage, pk=pk)
+    if not msg.is_read:
+        msg.is_read = True
+        msg.save()
+    return render(request, 'dash/message_detail.html', {'message': msg})
+
+@login_required
+def message_delete(request, pk):
+    """Delete a specific message."""
+    msg = get_object_or_404(ContactMessage, pk=pk)
+    if request.method == 'POST':
+        msg.delete()
+        messages.success(request, 'Message deleted from inbox.')
+        return redirect('message_list')
+    return render(request, 'dash/confirm_delete.html', {'object': f"Message from {msg.name}", 'type': 'Contact Message'})

@@ -269,6 +269,10 @@
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                 <span>Customization</span>
             </a>
+            <a href="{% url 'message_list' %}" class="nav-item {% if 'messages' in request.path %}active{% endif %}">
+                <i class="fa-solid fa-inbox"></i>
+                <span>Inbox</span>
+            </a>
 
             <div class="nav-label">Management</div>
             <a href="{% url 'user_list' %}" class="nav-item {% if 'users' in request.path %}active{% endif %}">

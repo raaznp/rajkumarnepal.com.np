@@ -80,4 +80,9 @@ urlpatterns = [
     path('portfolio/fact/add/', views.fact_add, name='fact_add'),
     path('portfolio/fact/edit/<int:pk>/', views.fact_edit, name='fact_edit'),
     path('portfolio/fact/delete/<int:pk>/', views.fact_delete, name='fact_delete'),
+    
+    # Communication (Contact Messages)
+    path('portfolio/messages/', views.message_list, name='message_list'),
+    path('portfolio/messages/<int:pk>/', views.message_detail, name='message_detail'),
+    path('portfolio/messages/delete/<int:pk>/', views.message_delete, name='message_delete'),
 ]
