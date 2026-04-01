@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
-from portfolio.models import Profile, Project, Skill, Experience, Education, Certification, Service, SocialLink, TypedText, Fact
+from portfolio.models import Profile, Project, Skill, Experience, Education, Certification, Service, SocialLink, TypedText, Fact, ExperienceDetail
 
 class ProfileForm(forms.ModelForm):
     class Meta:
