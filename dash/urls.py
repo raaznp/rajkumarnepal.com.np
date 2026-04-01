@@ -71,4 +71,13 @@ urlpatterns = [
     path('portfolio/social/add/', views.social_add, name='social_add'),
     path('portfolio/social/edit/<int:pk>/', views.social_edit, name='social_edit'),
     path('portfolio/social/delete/<int:pk>/', views.social_delete, name='social_delete'),
+    
+    # Personalization CRUD
+    path('portfolio/personalization/', views.personalization_list, name='personalization_list'),
+    path('portfolio/typed-text/add/', views.typed_text_add, name='typed_text_add'),
+    path('portfolio/typed-text/edit/<int:pk>/', views.typed_text_edit, name='typed_text_edit'),
+    path('portfolio/typed-text/delete/<int:pk>/', views.typed_text_delete, name='typed_text_delete'),
+    path('portfolio/fact/add/', views.fact_add, name='fact_add'),
+    path('portfolio/fact/edit/<int:pk>/', views.fact_edit, name='fact_edit'),
+    path('portfolio/fact/delete/<int:pk>/', views.fact_delete, name='fact_delete'),
 ]

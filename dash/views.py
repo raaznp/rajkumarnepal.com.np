@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm, ServiceForm, SocialLinkForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm, ServiceForm, SocialLinkForm, TypedTextForm, FactForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -371,3 +371,79 @@ def social_delete(request, pk):
         messages.success(request, 'Social link deleted!')
         return redirect('service_list')
     return render(request, 'dash/confirm_delete.html', {'object': social, 'type': 'Social Link'})
+
+# Personalization views (Typed Text & Facts)
+@login_required
+def personalization_list(request):
+    """View to list both typed texts and facts."""
+    typed_texts = TypedText.objects.all()
+    facts = Fact.objects.all()
+    return render(request, 'dash/personalization_list.html', {'typed_texts': typed_texts, 'facts': facts})
+
+@login_required
+def typed_text_add(request):
+    if request.method == 'POST':
+        form = TypedTextForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Typed text highlight added!')
+            return redirect('personalization_list')
+    else:
+        form = TypedTextForm()
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Add Typed Text Highlight'})
+
+@login_required
+def typed_text_edit(request, pk):
+    item = get_object_or_404(TypedText, pk=pk)
+    if request.method == 'POST':
+        form = TypedTextForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Typed text highlight updated!')
+            return redirect('personalization_list')
+    else:
+        form = TypedTextForm(instance=item)
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Edit Typed Text Highlight'})
+
+@login_required
+def typed_text_delete(request, pk):
+    item = get_object_or_404(TypedText, pk=pk)
+    if request.method == 'POST':
+        item.delete()
+        messages.success(request, 'Typed text highlight deleted!')
+        return redirect('personalization_list')
+    return render(request, 'dash/confirm_delete.html', {'object': item, 'type': 'Typed Text Highlight'})
+
+@login_required
+def fact_add(request):
+    if request.method == 'POST':
+        form = FactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Fact added!')
+            return redirect('personalization_list')
+    else:
+        form = FactForm()
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Add Portfolio Fact'})
+
+@login_required
+def fact_edit(request, pk):
+    fact = get_object_or_404(Fact, pk=pk)
+    if request.method == 'POST':
+        form = FactForm(request.POST, instance=fact)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Fact updated!')
+            return redirect('personalization_list')
+    else:
+        form = FactForm(instance=fact)
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Edit Portfolio Fact'})
+
+@login_required
+def fact_delete(request, pk):
+    fact = get_object_or_404(Fact, pk=pk)
+    if request.method == 'POST':
+        fact.delete()
+        messages.success(request, 'Fact deleted!')
+        return redirect('personalization_list')
+    return render(request, 'dash/confirm_delete.html', {'object': fact, 'type': 'Fact'})
