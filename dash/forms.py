@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
-from portfolio.models import Profile
+from portfolio.models import Profile, Project
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -11,6 +11,14 @@ class ProfileForm(forms.ModelForm):
         widgets = {
             'intro_text': forms.Textarea(attrs={'rows': 3}),
             'about_text': forms.Textarea(attrs={'rows': 5}),
+        }
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = '__all__'
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 5}),
         }
 
 class UserProfileUpdateForm(forms.ModelForm):

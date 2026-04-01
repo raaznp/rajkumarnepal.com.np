@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -87,3 +87,47 @@ def profile_info(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'dash/user_form.html', {'form': form, 'title': 'Manage Portfolio Profile Info'})
+
+# Project Management Views
+@login_required
+def project_list(request):
+    """View to list all portfolio projects."""
+    projects = Project.objects.all()
+    return render(request, 'dash/project_list.html', {'projects': projects})
+
+@login_required
+def project_add(request):
+    """View to add a new project."""
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Project added successfully!')
+            return redirect('project_list')
+    else:
+        form = ProjectForm()
+    return render(request, 'dash/project_form.html', {'form': form, 'title': 'Add New Project'})
+
+@login_required
+def project_edit(request, pk):
+    """View to edit an existing project."""
+    project = get_object_or_404(Project, pk=pk)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES, instance=project)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Project "{project.title}" updated successfully!')
+            return redirect('project_list')
+    else:
+        form = ProjectForm(instance=project)
+    return render(request, 'dash/project_form.html', {'form': form, 'title': f'Edit Project: {project.title}'})
+
+@login_required
+def project_delete(request, pk):
+    """View to delete a project."""
+    project = get_object_or_404(Project, pk=pk)
+    if request.method == 'POST':
+        project.delete()
+        messages.success(request, 'Project deleted successfully!')
+        return redirect('project_list')
+    return render(request, 'dash/confirm_delete.html', {'object': project, 'type': 'Project'})

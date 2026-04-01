@@ -31,4 +31,10 @@ urlpatterns = [
     
     # Portfolio Management
     path('portfolio/profile/', views.profile_info, name='profile_info'),
+    
+    # Projects CRUD
+    path('portfolio/projects/', views.project_list, name='project_list'),
+    path('portfolio/projects/add/', views.project_add, name='project_add'),
+    path('portfolio/projects/edit/<int:pk>/', views.project_edit, name='project_edit'),
+    path('portfolio/projects/delete/<int:pk>/', views.project_delete, name='project_delete'),
 ]
