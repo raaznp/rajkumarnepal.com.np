@@ -2,6 +2,17 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
+from portfolio.models import Profile
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        widgets = {
+            'intro_text': forms.Textarea(attrs={'rows': 3}),
+            'about_text': forms.Textarea(attrs={'rows': 5}),
+        }
+
 class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser

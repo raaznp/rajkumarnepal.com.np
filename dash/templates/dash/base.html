@@ -241,7 +241,7 @@
             </a>
             
             <div class="nav-label">Portfolio Content</div>
-            <a href="#" class="nav-item">
+            <a href="{% url 'profile_info' %}" class="nav-item {% if 'profile' in request.path %}active{% endif %}">
                 <i class="fa-solid fa-user-gear"></i>
                 <span>Profile Info</span>
             </a>

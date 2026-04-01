@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -72,3 +72,18 @@ def account_settings(request):
         'active_tab': 'settings'
     }
     return render(request, 'dash/settings.html', render_data)
+
+@login_required
+@user_passes_test(is_superuser)
+def profile_info(request):
+    """View to edit the global site profile info."""
+    profile = Profile.objects.first()
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Portfolio profile updated successfully!')
+            return redirect('profile_info')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'dash/user_form.html', {'form': form, 'title': 'Manage Portfolio Profile Info'})

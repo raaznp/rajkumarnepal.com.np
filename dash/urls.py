@@ -28,4 +28,7 @@ urlpatterns = [
     
     # Account Settings
     path('settings/', views.account_settings, name='account_settings'),
+    
+    # Portfolio Management
+    path('portfolio/profile/', views.profile_info, name='profile_info'),
 ]
