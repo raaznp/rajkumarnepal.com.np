@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm, ServiceForm, SocialLinkForm, TypedTextForm, FactForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm, ServiceForm, SocialLinkForm, TypedTextForm, FactForm, ExperienceDetailForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -198,8 +198,9 @@ def experience_add(request):
 
 @login_required
 def experience_edit(request, pk):
-    """View to edit an existing experience."""
+    """View to edit an existing experience and its details."""
     exp = get_object_or_404(Experience, pk=pk)
+    details = exp.details.all()
     if request.method == 'POST':
         form = ExperienceForm(request.POST, instance=exp)
         if form.is_valid():
@@ -208,7 +209,37 @@ def experience_edit(request, pk):
             return redirect('experience_list')
     else:
         form = ExperienceForm(instance=exp)
-    return render(request, 'dash/experience_form.html', {'form': form, 'title': f'Edit Experience: {exp.company}'})
+    
+    detail_form = ExperienceDetailForm()
+    return render(request, 'dash/experience_form.html', {
+        'form': form, 
+        'detail_form': detail_form,
+        'details': details,
+        'title': f'Edit Experience: {exp.company}',
+        'is_edit': True
+    })
+
+@login_required
+def experience_detail_add(request, experience_pk):
+    """Add a bullet point detail to an experience."""
+    exp = get_object_or_404(Experience, pk=experience_pk)
+    if request.method == 'POST':
+        form = ExperienceDetailForm(request.POST)
+        if form.is_valid():
+            detail = form.save(commit=False)
+            detail.experience = exp
+            detail.save()
+            messages.success(request, 'Experience detail added!')
+    return redirect('experience_edit', pk=experience_pk)
+
+@login_required
+def experience_detail_delete(request, pk):
+    """Delete a specific detail bullet point."""
+    detail = get_object_or_404(ExperienceDetail, pk=pk)
+    experience_pk = detail.experience.pk
+    detail.delete()
+    messages.success(request, 'Experience detail removed.')
+    return redirect('experience_edit', pk=experience_pk)
 
 @login_required
 def experience_delete(request, pk):

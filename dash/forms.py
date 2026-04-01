@@ -67,6 +67,14 @@ class FactForm(forms.ModelForm):
         model = Fact
         fields = '__all__'
 
+class ExperienceDetailForm(forms.ModelForm):
+    class Meta:
+        model = ExperienceDetail
+        fields = ['detail']
+        widgets = {
+            'detail': forms.Textarea(attrs={'rows': 2, 'placeholder': 'e.g. Led a team of 5 developers to deliver...'}),
+        }
+
 class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
