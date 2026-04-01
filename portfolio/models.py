@@ -10,6 +10,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=100)
     website = models.URLField()
     degree = models.CharField(max_length=100)
+    profession = models.CharField(max_length=100, blank=True, null=True)
     freelance_status = models.BooleanField(default=True)
 
     class Meta:
