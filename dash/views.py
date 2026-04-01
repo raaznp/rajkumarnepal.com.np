@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -131,3 +131,47 @@ def project_delete(request, pk):
         messages.success(request, 'Project deleted successfully!')
         return redirect('project_list')
     return render(request, 'dash/confirm_delete.html', {'object': project, 'type': 'Project'})
+
+# Skill Management Views
+@login_required
+def skill_list(request):
+    """View to list all portfolio skills."""
+    skills = Skill.objects.all().order_by('-percentage')
+    return render(request, 'dash/skill_list.html', {'skills': skills})
+
+@login_required
+def skill_add(request):
+    """View to add a new skill."""
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Skill added successfully!')
+            return redirect('skill_list')
+    else:
+        form = SkillForm()
+    return render(request, 'dash/skill_form.html', {'form': form, 'title': 'Add New Skill'})
+
+@login_required
+def skill_edit(request, pk):
+    """View to edit an existing skill."""
+    skill = get_object_or_404(Skill, pk=pk)
+    if request.method == 'POST':
+        form = SkillForm(request.POST, instance=skill)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Skill "{skill.name}" updated successfully!')
+            return redirect('skill_list')
+    else:
+        form = SkillForm(instance=skill)
+    return render(request, 'dash/skill_form.html', {'form': form, 'title': f'Edit Skill: {skill.name}'})
+
+@login_required
+def skill_delete(request, pk):
+    """View to delete a skill."""
+    skill = get_object_or_404(Skill, pk=pk)
+    if request.method == 'POST':
+        skill.delete()
+        messages.success(request, 'Skill deleted successfully!')
+        return redirect('skill_list')
+    return render(request, 'dash/confirm_delete.html', {'object': skill, 'type': 'Skill'})

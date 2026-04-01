@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
-from portfolio.models import Profile, Project
+from portfolio.models import Profile, Project, Skill
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -19,6 +19,14 @@ class ProjectForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'description': forms.Textarea(attrs={'rows': 5}),
+        }
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = '__all__'
+        widgets = {
+            'percentage': forms.NumberInput(attrs={'max': 100, 'min': 0}),
         }
 
 class UserProfileUpdateForm(forms.ModelForm):

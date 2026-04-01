@@ -37,4 +37,10 @@ urlpatterns = [
     path('portfolio/projects/add/', views.project_add, name='project_add'),
     path('portfolio/projects/edit/<int:pk>/', views.project_edit, name='project_edit'),
     path('portfolio/projects/delete/<int:pk>/', views.project_delete, name='project_delete'),
+    
+    # Skills CRUD
+    path('portfolio/skills/', views.skill_list, name='skill_list'),
+    path('portfolio/skills/add/', views.skill_add, name='skill_add'),
+    path('portfolio/skills/edit/<int:pk>/', views.skill_edit, name='skill_edit'),
+    path('portfolio/skills/delete/<int:pk>/', views.skill_delete, name='skill_delete'),
 ]
