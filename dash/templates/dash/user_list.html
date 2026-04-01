@@ -1,0 +1,82 @@
+{% extends 'dash/base.html' %}
+
+{% block title %}User Management{% endblock %}
+
+{% block header_title %}Users Control Panel{% endblock %}
+
+{% block content %}
+<div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+        <div>
+            <h2 style="font-size: 1.5rem; margin-bottom: 4px;">User List</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Manage dashboard access and permissions.</p>
+        </div>
+        <a href="{% url 'add_user' %}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--primary); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition);">
+            <i class="fa-solid fa-user-plus"></i> Add New User
+        </a>
+    </div>
+
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <th style="padding: 16px; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase;">User</th>
+                    <th style="padding: 16px; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase;">Role</th>
+                    <th style="padding: 16px; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase;">Status</th>
+                    <th style="padding: 16px; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase;">Last Login</th>
+                    <th style="padding: 16px; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr style="border-bottom: 1px solid var(--border); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding: 16px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            {% if u.profile_picture %}
+                                <img src="{{ u.profile_picture.url }}" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover;">
+                            {% else %}
+                                <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.8rem;">
+                                    {{ u.username|first|upper }}
+                                </div>
+                            {% endif %}
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.95rem;">{{ u.username }}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">{{ u.email }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 16px;">
+                        {% if u.is_superuser %}
+                            <span style="display: inline-flex; padding: 4px 10px; border-radius: 6px; background: rgba(99, 102, 241, 0.15); color: #818cf8; font-size: 0.75rem; font-weight: 600;">Superuser</span>
+                        {% elif u.is_staff %}
+                            <span style="display: inline-flex; padding: 4px 10px; border-radius: 6px; background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 0.75rem; font-weight: 600;">Staff</span>
+                        {% else %}
+                            <span style="display: inline-flex; padding: 4px 10px; border-radius: 6px; background: rgba(148, 163, 184, 0.2); color: #94a3b8; font-size: 0.75rem; font-weight: 600;">Regular</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 16px;">
+                        {% if u.is_active %}
+                            <span style="display: flex; align-items: center; gap: 6px; color: #22c55e; font-size: 0.85rem; font-weight: 500;">
+                                <div style="width: 6px; height: 6px; border-radius: 50%; background: #22c55e;"></div> Active
+                            </span>
+                        {% else %}
+                            <span style="display: flex; align-items: center; gap: 6px; color: #ef4444; font-size: 0.85rem; font-weight: 500;">
+                                <div style="width: 6px; height: 6px; border-radius: 50%; background: #ef4444;"></div> Inactive
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 16px; color: var(--text-muted); font-size: 0.85rem;">
+                        {{ u.last_login|date:"M d, Y"|default:"Never" }}
+                    </td>
+                    <td style="padding: 16px; text-align: right;">
+                        <a href="{% url 'edit_user' u.pk %}" style="display: inline-flex; align-items: center; gap: 6px; color: var(--primary-light); text-decoration: none; font-size: 0.85rem; font-weight: 600; padding: 6px 12px; border-radius: 6px; transition: background 0.3s;" onmouseover="this.style.background='rgba(99, 102, 241, 0.1)'" onmouseout="this.style.background='transparent'">
+                            <i class="fa-regular fa-pen-to-square"></i> Edit
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

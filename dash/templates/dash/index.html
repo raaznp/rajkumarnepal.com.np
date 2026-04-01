@@ -1,0 +1,60 @@
+{% extends 'dash/base.html' %}
+
+{% block title %}Dashboard Home{% endblock %}
+
+{% block header_title %}Overview Dashboard{% endblock %}
+
+{% block content %}
+<div class="stat-grid">
+    <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">
+            <i class="fa-solid fa-briefcase"></i>
+        </div>
+        <div class="stat-info">
+            <div class="stat-label">Total Projects</div>
+            <div class="stat-value">{{ stats.total_projects }}</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(34, 197, 94, 0.1); color: #22c55e;">
+            <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="stat-info">
+            <div class="stat-label">Skills Listed</div>
+            <div class="stat-value">{{ stats.total_skills }}</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+            <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="stat-info">
+            <div class="stat-label">Qualifications</div>
+            <div class="stat-value">{{ stats.total_experiences }}</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(168, 85, 247, 0.1); color: #a855f7;">
+            <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="stat-info">
+            <div class="stat-label">Messages</div>
+            <div class="stat-value">{{ stats.unread_messages }}</div>
+        </div>
+    </div>
+</div>
+
+<div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; text-align: center;">
+    <h2 style="font-size: 1.5rem; margin-bottom: 12px;">Welcome to your Custom Dashboard</h2>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 32px;">
+        This is your centralized hub for managing everything on your portfolio. Use the sidebar to update your profile, 
+        add new projects, or check incoming messages from your contact form.
+    </p>
+    <a href="{% url 'add_user' %}" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: var(--primary); color: white; border-radius: 12px; text-decoration: none; font-weight: 600; transition: var(--transition);">
+        <i class="fa-solid fa-user-plus"></i> Add a Team Member
+    </a>
+</div>
+{% endblock %}
