@@ -43,4 +43,10 @@ urlpatterns = [
     path('portfolio/skills/add/', views.skill_add, name='skill_add'),
     path('portfolio/skills/edit/<int:pk>/', views.skill_edit, name='skill_edit'),
     path('portfolio/skills/delete/<int:pk>/', views.skill_delete, name='skill_delete'),
+    
+    # Experience CRUD
+    path('portfolio/experience/', views.experience_list, name='experience_list'),
+    path('portfolio/experience/add/', views.experience_add, name='experience_add'),
+    path('portfolio/experience/edit/<int:pk>/', views.experience_edit, name='experience_edit'),
+    path('portfolio/experience/delete/<int:pk>/', views.experience_delete, name='experience_delete'),
 ]

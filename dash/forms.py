@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
-from portfolio.models import Profile, Project, Skill
+from portfolio.models import Profile, Project, Skill, Experience
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -28,6 +28,11 @@ class SkillForm(forms.ModelForm):
         widgets = {
             'percentage': forms.NumberInput(attrs={'max': 100, 'min': 0}),
         }
+
+class ExperienceForm(forms.ModelForm):
+    class Meta:
+        model = Experience
+        fields = '__all__'
 
 class UserProfileUpdateForm(forms.ModelForm):
     class Meta:

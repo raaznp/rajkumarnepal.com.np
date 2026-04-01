@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -175,3 +175,47 @@ def skill_delete(request, pk):
         messages.success(request, 'Skill deleted successfully!')
         return redirect('skill_list')
     return render(request, 'dash/confirm_delete.html', {'object': skill, 'type': 'Skill'})
+
+# Experience Management Views
+@login_required
+def experience_list(request):
+    """View to list all portfolio experiences."""
+    experiences = Experience.objects.all().order_by('-duration')
+    return render(request, 'dash/experience_list.html', {'experiences': experiences})
+
+@login_required
+def experience_add(request):
+    """View to add a new experience."""
+    if request.method == 'POST':
+        form = ExperienceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Experience added successfully!')
+            return redirect('experience_list')
+    else:
+        form = ExperienceForm()
+    return render(request, 'dash/experience_form.html', {'form': form, 'title': 'Add New Experience'})
+
+@login_required
+def experience_edit(request, pk):
+    """View to edit an existing experience."""
+    exp = get_object_or_404(Experience, pk=pk)
+    if request.method == 'POST':
+        form = ExperienceForm(request.POST, instance=exp)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Experience at "{exp.company}" updated successfully!')
+            return redirect('experience_list')
+    else:
+        form = ExperienceForm(instance=exp)
+    return render(request, 'dash/experience_form.html', {'form': form, 'title': f'Edit Experience: {exp.company}'})
+
+@login_required
+def experience_delete(request, pk):
+    """View to delete an experience."""
+    exp = get_object_or_404(Experience, pk=pk)
+    if request.method == 'POST':
+        exp.delete()
+        messages.success(request, 'Experience deleted successfully!')
+        return redirect('experience_list')
+    return render(request, 'dash/confirm_delete.html', {'object': exp, 'type': 'Experience'})
