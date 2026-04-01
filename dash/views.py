@@ -3,7 +3,11 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm, ServiceForm, SocialLinkForm, TypedTextForm, FactForm, ExperienceDetailForm
 from users.models import CustomUser
-from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
+from portfolio.models import (
+    Profile, Project, Skill, Experience, ContactMessage, 
+    Education, Certification, Service, SocialLink, TypedText, 
+    Fact, ExperienceDetail
+)
 
 def is_superuser(user):
     return user.is_superuser
