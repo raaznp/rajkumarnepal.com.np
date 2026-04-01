@@ -287,8 +287,8 @@
 
         <div class="sidebar-footer">
             <div class="user-profile">
-                {% if user.profile_picture %}
-                <img src="{{ user.profile_picture.url }}" class="user-avatar" alt="">
+                {% if user.profile_image_url %}
+                <img src="{{ user.profile_image_url }}" class="user-avatar" alt="">
                 {% else %}
                 <div class="user-avatar" style="display: flex; align-items: center; justify-content: center; background: var(--primary); color: white; font-weight: 700;">
                     {{ user.username|first|upper }}

@@ -11,11 +11,17 @@ def is_superuser(user):
 @login_required
 def dashboard_home(request):
     """Main dashboard overview with statistics."""
+    try:
+        unread_count = ContactMessage.objects.filter(is_read=False).count()
+    except Exception:
+        # Fallback if the is_read column doesn't exist yet in the database
+        unread_count = ContactMessage.objects.count()
+
     stats = {
         'total_projects': Project.objects.count(),
         'total_skills': Skill.objects.count(),
         'total_experiences': Experience.objects.count(),
-        'unread_messages': ContactMessage.objects.filter(is_read=False).count() if hasattr(ContactMessage, 'is_read') else ContactMessage.objects.count()
+        'unread_messages': unread_count
     }
     return render(request, 'dash/index.html', {'stats': stats})
 
