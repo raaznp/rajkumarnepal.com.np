@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm
 from users.models import CustomUser
 from portfolio.models import Profile, Project, Skill, Experience, ContactMessage
 
@@ -219,3 +219,79 @@ def experience_delete(request, pk):
         messages.success(request, 'Experience deleted successfully!')
         return redirect('experience_list')
     return render(request, 'dash/confirm_delete.html', {'object': exp, 'type': 'Experience'})
+
+# Education & Certification views
+@login_required
+def education_list(request):
+    """View to list both education and certifications."""
+    educations = Education.objects.all()
+    certs = Certification.objects.all()
+    return render(request, 'dash/education_list.html', {'educations': educations, 'certs': certs})
+
+@login_required
+def education_add(request):
+    if request.method == 'POST':
+        form = EducationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Education entry added!')
+            return redirect('education_list')
+    else:
+        form = EducationForm()
+    return render(request, 'dash/academic_form.html', {'form': form, 'title': 'Add Education'})
+
+@login_required
+def education_edit(request, pk):
+    edu = get_object_or_404(Education, pk=pk)
+    if request.method == 'POST':
+        form = EducationForm(request.POST, instance=edu)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Education entry updated!')
+            return redirect('education_list')
+    else:
+        form = EducationForm(instance=edu)
+    return render(request, 'dash/academic_form.html', {'form': form, 'title': 'Edit Education'})
+
+@login_required
+def education_delete(request, pk):
+    edu = get_object_or_404(Education, pk=pk)
+    if request.method == 'POST':
+        edu.delete()
+        messages.success(request, 'Education entry deleted!')
+        return redirect('education_list')
+    return render(request, 'dash/confirm_delete.html', {'object': edu, 'type': 'Education'})
+
+@login_required
+def certification_add(request):
+    if request.method == 'POST':
+        form = CertificationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Certification added!')
+            return redirect('education_list')
+    else:
+        form = CertificationForm()
+    return render(request, 'dash/academic_form.html', {'form': form, 'title': 'Add Certification'})
+
+@login_required
+def certification_edit(request, pk):
+    cert = get_object_or_404(Certification, pk=pk)
+    if request.method == 'POST':
+        form = CertificationForm(request.POST, instance=cert)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Certification updated!')
+            return redirect('education_list')
+    else:
+        form = CertificationForm(instance=cert)
+    return render(request, 'dash/academic_form.html', {'form': form, 'title': 'Edit Certification'})
+
+@login_required
+def certification_delete(request, pk):
+    cert = get_object_or_404(Certification, pk=pk)
+    if request.method == 'POST':
+        cert.delete()
+        messages.success(request, 'Certification deleted!')
+        return redirect('education_list')
+    return render(request, 'dash/confirm_delete.html', {'object': cert, 'type': 'Certification'})

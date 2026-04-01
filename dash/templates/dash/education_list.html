@@ -1,0 +1,75 @@
+{% extends 'dash/base.html' %}
+
+{% block title %}Education & Certifications{% endblock %}
+
+{% block header_title %}Academic & Professional Achievements{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
+    
+    <!-- Education Section -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <h2 style="font-size: 1.25rem; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-user-graduate" style="color: var(--primary);"></i> Education
+            </h2>
+            <a href="{% url 'education_add' %}" style="padding: 6px 12px; background: var(--primary); color: white; border-radius: 8px; text-decoration: none; font-size: 0.8rem; font-weight: 600;">
+                <i class="fa-solid fa-plus"></i> Add Edu
+            </a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            {% for e in educations %}
+            <div style="padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: rgba(15, 23, 42, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h3 style="margin: 0; font-size: 1rem; font-weight: 600;">{{ e.degree }}</h3>
+                        <p style="margin: 4px 0; font-size: 0.85rem; color: var(--primary-light);">{{ e.institution }}</p>
+                        <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">{{ e.duration }}</p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <a href="{% url 'education_edit' e.pk %}" style="color: var(--text-muted); font-size: 0.8rem;"><i class="fa-solid fa-pen"></i></a>
+                        <a href="{% url 'education_delete' e.pk %}" style="color: #ef4444; font-size: 0.8rem;"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">No education history.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Certification Section -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <h2 style="font-size: 1.25rem; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-certificate" style="color: #fbbf24;"></i> Certifications
+            </h2>
+            <a href="{% url 'certification_add' %}" style="padding: 6px 12px; background: #fbbf24; color: #1e1b4b; border-radius: 8px; text-decoration: none; font-size: 0.8rem; font-weight: 700;">
+                <i class="fa-solid fa-plus"></i> Add Cert
+            </a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            {% for c in certs %}
+            <div style="padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: rgba(15, 23, 42, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h3 style="margin: 0; font-size: 1rem; font-weight: 600;">{{ c.name }}</h3>
+                        <p style="margin: 4px 0; font-size: 0.85rem; color: #fbbf24;">{{ c.issuer }}</p>
+                        <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">{{ c.date }}</p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <a href="{% url 'certification_edit' c.pk %}" style="color: var(--text-muted); font-size: 0.8rem;"><i class="fa-solid fa-pen"></i></a>
+                        <a href="{% url 'certification_delete' c.pk %}" style="color: #ef4444; font-size: 0.8rem;"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">No certifications.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

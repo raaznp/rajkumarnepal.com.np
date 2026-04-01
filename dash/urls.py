@@ -49,4 +49,15 @@ urlpatterns = [
     path('portfolio/experience/add/', views.experience_add, name='experience_add'),
     path('portfolio/experience/edit/<int:pk>/', views.experience_edit, name='experience_edit'),
     path('portfolio/experience/delete/<int:pk>/', views.experience_delete, name='experience_delete'),
+    
+    # Education CRUD
+    path('portfolio/education/', views.education_list, name='education_list'),
+    path('portfolio/education/add/', views.education_add, name='education_add'),
+    path('portfolio/education/edit/<int:pk>/', views.education_edit, name='education_edit'),
+    path('portfolio/education/delete/<int:pk>/', views.education_delete, name='education_delete'),
+    
+    # Certification CRUD
+    path('portfolio/certification/add/', views.certification_add, name='certification_add'),
+    path('portfolio/certification/edit/<int:pk>/', views.certification_edit, name='certification_edit'),
+    path('portfolio/certification/delete/<int:pk>/', views.certification_delete, name='certification_delete'),
 ]

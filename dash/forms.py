@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
-from portfolio.models import Profile, Project, Skill, Experience
+from portfolio.models import Profile, Project, Skill, Experience, Education, Certification
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -32,6 +32,16 @@ class SkillForm(forms.ModelForm):
 class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
+        fields = '__all__'
+
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        fields = '__all__'
+
+class CertificationForm(forms.ModelForm):
+    class Meta:
+        model = Certification
         fields = '__all__'
 
 class UserProfileUpdateForm(forms.ModelForm):
