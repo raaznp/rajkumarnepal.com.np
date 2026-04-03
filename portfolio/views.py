@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import (
     Profile, SocialLink, TypedText, Fact, Skill, 
-    Education, Certification, Experience, Project, Service
+    Education, Certification, Experience, Project, Service, 
+    Volunteering, VolunteeringDetail
 )
 from .forms import ContactForm
 
@@ -17,6 +18,7 @@ def home(request):
     experiences = Experience.objects.all().prefetch_related('details')
     projects = Project.objects.all()
     services = Service.objects.all()
+    volunteering = Volunteering.objects.all().prefetch_related('details')
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -40,6 +42,7 @@ def home(request):
         'experiences': experiences,
         'projects': projects,
         'services': services,
+        'volunteering': volunteering,
         'form': form,
     }
     return render(request, 'portfolio/index.html', context)

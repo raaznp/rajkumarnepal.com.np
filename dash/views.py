@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, CertificationForm, ServiceForm, SocialLinkForm, TypedTextForm, FactForm, ExperienceDetailForm
+from .forms import (
+    CustomUserCreationForm, CustomUserChangeForm, UserProfileUpdateForm, 
+    ProfileForm, ProjectForm, SkillForm, ExperienceForm, EducationForm, 
+    CertificationForm, ServiceForm, SocialLinkForm, TypedTextForm, 
+    FactForm, ExperienceDetailForm, VolunteeringForm, VolunteeringDetailForm
+)
 from users.models import CustomUser
 from portfolio.models import (
     Profile, Project, Skill, Experience, ContactMessage, 
     Education, Certification, Service, SocialLink, TypedText, 
-    Fact, ExperienceDetail
+    Fact, ExperienceDetail, Volunteering, VolunteeringDetail
 )
 
 def is_superuser(user):
@@ -25,6 +30,7 @@ def dashboard_home(request):
         'total_projects': Project.objects.count(),
         'total_skills': Skill.objects.count(),
         'total_experiences': Experience.objects.count(),
+        'total_volunteering': Volunteering.objects.count(),
         'unread_messages': unread_count
     }
     return render(request, 'dash/index.html', {'stats': stats})
@@ -260,6 +266,81 @@ def experience_delete(request, pk):
         messages.success(request, 'Experience deleted successfully!')
         return redirect('experience_list')
     return render(request, 'dash/confirm_delete.html', {'object': exp, 'type': 'Experience'})
+
+# Volunteering Management Views
+@login_required
+def volunteering_list(request):
+    """View to list all portfolio volunteering experiences."""
+    volunteering_items = Volunteering.objects.all().order_by('-duration')
+    return render(request, 'dash/volunteering_list.html', {'volunteering_items': volunteering_items})
+
+@login_required
+def volunteering_add(request):
+    """View to add a new volunteering experience."""
+    if request.method == 'POST':
+        form = VolunteeringForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Volunteering experience added successfully!')
+            return redirect('volunteering_list')
+    else:
+        form = VolunteeringForm()
+    return render(request, 'dash/volunteering_form.html', {'form': form, 'title': 'Add New Volunteering'})
+
+@login_required
+def volunteering_edit(request, pk):
+    """View to edit an existing volunteering experience and its details."""
+    vol = get_object_or_404(Volunteering, pk=pk)
+    details = vol.details.all()
+    if request.method == 'POST':
+        form = VolunteeringForm(request.POST, instance=vol)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Volunteering at "{vol.organization}" updated successfully!')
+            return redirect('volunteering_list')
+    else:
+        form = VolunteeringForm(instance=vol)
+    
+    detail_form = VolunteeringDetailForm()
+    return render(request, 'dash/volunteering_form.html', {
+        'form': form, 
+        'detail_form': detail_form,
+        'details': details,
+        'title': f'Edit Volunteering: {vol.organization}',
+        'is_edit': True
+    })
+
+@login_required
+def volunteering_detail_add(request, volunteering_pk):
+    """Add a bullet point detail to a volunteering entry."""
+    vol = get_object_or_404(Volunteering, pk=volunteering_pk)
+    if request.method == 'POST':
+        form = VolunteeringDetailForm(request.POST)
+        if form.is_valid():
+            detail = form.save(commit=False)
+            detail.volunteering = vol
+            detail.save()
+            messages.success(request, 'Volunteering detail added!')
+    return redirect('volunteering_edit', pk=volunteering_pk)
+
+@login_required
+def volunteering_detail_delete(request, pk):
+    """Delete a specific detail bullet point."""
+    detail = get_object_or_404(VolunteeringDetail, pk=pk)
+    volunteering_pk = detail.volunteering.pk
+    detail.delete()
+    messages.success(request, 'Volunteering detail removed.')
+    return redirect('volunteering_edit', pk=volunteering_pk)
+
+@login_required
+def volunteering_delete(request, pk):
+    """View to delete a volunteering experience."""
+    vol = get_object_or_404(Volunteering, pk=pk)
+    if request.method == 'POST':
+        vol.delete()
+        messages.success(request, 'Volunteering experience deleted successfully!')
+        return redirect('volunteering_list')
+    return render(request, 'dash/confirm_delete.html', {'object': vol, 'type': 'Volunteering'})
 
 # Education & Certification views
 @login_required

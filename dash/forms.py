@@ -2,7 +2,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from users.models import CustomUser
 
-from portfolio.models import Profile, Project, Skill, Experience, Education, Certification, Service, SocialLink, TypedText, Fact, ExperienceDetail
+from portfolio.models import (
+    Profile, Project, Skill, Experience, Education, 
+    Certification, Service, SocialLink, TypedText, Fact, 
+    ExperienceDetail, Volunteering, VolunteeringDetail
+)
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -73,6 +77,19 @@ class ExperienceDetailForm(forms.ModelForm):
         fields = ['detail']
         widgets = {
             'detail': forms.Textarea(attrs={'rows': 2, 'placeholder': 'e.g. Led a team of 5 developers to deliver...'}),
+        }
+
+class VolunteeringForm(forms.ModelForm):
+    class Meta:
+        model = Volunteering
+        fields = '__all__'
+
+class VolunteeringDetailForm(forms.ModelForm):
+    class Meta:
+        model = VolunteeringDetail
+        fields = ['detail']
+        widgets = {
+            'detail': forms.Textarea(attrs={'rows': 2, 'placeholder': 'e.g. Contributed to open source projects...'}),
         }
 
 class UserProfileUpdateForm(forms.ModelForm):

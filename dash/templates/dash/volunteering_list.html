@@ -1,0 +1,51 @@
+{% extends 'dash/base.html' %}
+
+{% block title %}Manage Volunteering{% endblock %}
+
+{% block header_title %}Volunteering & Community{% endblock %}
+
+{% block content %}
+<div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+        <div>
+            <h2 style="font-size: 1.5rem; margin-bottom: 4px;">Volunteering Experience</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Document your contributions and community service.</p>
+        </div>
+        <a href="{% url 'volunteering_add' %}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--primary); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition);">
+            <i class="fa-solid fa-plus"></i> Add Volunteering
+        </a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+        {% for v in volunteering_items %}
+        <div style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: center; transition: var(--transition);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="display: flex; gap: 24px; align-items: center;">
+                <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(99, 102, 241, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0 0 4px; font-size: 1.1rem; font-weight: 600;">{{ v.role }}</h3>
+                    <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text-muted);">
+                        <span style="display: flex; align-items: center; gap: 4px;"><i class="fa-solid fa-users" style="font-size: 0.8rem;"></i> {{ v.organization }}</span>
+                        <span style="opacity: 0.3;">|</span>
+                        <span style="display: flex; align-items: center; gap: 4px;"><i class="fa-solid fa-calendar-days" style="font-size: 0.8rem;"></i> {{ v.duration }}</span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <a href="{% url 'volunteering_edit' v.pk %}" style="padding: 10px 16px; border-radius: 10px; background: rgba(255,255,255,0.05); color: var(--text-main); text-decoration: none; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border); transition: 0.3s;" onmouseover="this.style.background='rgba(99, 102, 241, 0.1)'; this.style.borderColor='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='var(--border)'">
+                    Edit Details
+                </a>
+                <a href="{% url 'volunteering_delete' v.pk %}" style="padding: 10px 16px; border-radius: 10px; background: rgba(239, 68, 68, 0.05); color: #ef4444; text-decoration: none; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(239, 68, 68, 0.1); transition: 0.3s;" onmouseover="this.style.background='rgba(239, 68, 68, 0.1)'; this.style.borderColor='#ef4444'" onmouseout="this.style.background='rgba(239, 68, 68, 0.05)'; this.style.borderColor='rgba(239, 68, 68, 0.1)'">
+                    <i class="fa-regular fa-trash-can"></i>
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div style="text-align: center; padding: 60px; background: rgba(15, 23, 42, 0.2); border: 1px dashed var(--border); border-radius: 16px;">
+            <p style="color: var(--text-muted); margin: 0;">No volunteering history recorded yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

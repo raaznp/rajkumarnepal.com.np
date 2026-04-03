@@ -295,6 +295,26 @@
                         </ul>
                     </div>
                     {% endfor %}
+
+                    <h2 style="margin-top: 32px;">Volunteering</h2>
+                    {% for vol in volunteering %}
+                    <div class="resume-item">
+                        <h3>{{ vol.role }}</h3>
+                        <span class="sp-box">{{ vol.duration }}</span>
+                        <p>{{ vol.organization }}, {{ vol.location }}</p>
+                        <ul>
+                            {% for detail in vol.details.all %}
+                            <li>{{ detail.detail }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% empty %}
+                    <div class="resume-item">
+                        <h3>Volunteer Role</h3>
+                        <span class="sp-box">2020 - 2021</span>
+                        <p>Organization Name, Location</p>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
 

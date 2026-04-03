@@ -85,7 +85,26 @@ class ExperienceDetail(models.Model):
     detail = models.TextField()
 
     def __str__(self):
-        return f"Detail for {self.experience.role}"
+        return f"Detail for {self.experience.role} at {self.experience.company}"
+
+class Volunteering(models.Model):
+    role = models.CharField(max_length=100)
+    duration = models.CharField(max_length=50)
+    organization = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = "Volunteering"
+
+    def __str__(self):
+        return f"{self.role} at {self.organization}"
+
+class VolunteeringDetail(models.Model):
+    volunteering = models.ForeignKey(Volunteering, related_name='details', on_delete=models.CASCADE)
+    detail = models.TextField()
+
+    def __str__(self):
+        return f"Detail for {self.volunteering.role} at {self.volunteering.organization}"
 
 class Project(models.Model):
     title = models.CharField(max_length=100)

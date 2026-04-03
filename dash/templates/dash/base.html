@@ -257,6 +257,10 @@
                 <i class="fa-solid fa-briefcase-clock"></i>
                 <span>Experience</span>
             </a>
+            <a href="{% url 'volunteering_list' %}" class="nav-item {% if 'volunteering' in request.path %}active{% endif %}">
+                <i class="fa-solid fa-heart"></i>
+                <span>Volunteering</span>
+            </a>
             <a href="{% url 'education_list' %}" class="nav-item {% if 'education' in request.path or 'certification' in request.path %}active{% endif %}">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span>Education</span>
